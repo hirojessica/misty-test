@@ -513,6 +513,15 @@
 }
 
 @media (max-width: 900px) {
+  .new-arrival-grid {
+    cursor: grab;
+    touch-action: pan-x pan-y;
+  }
+
+  .new-arrival-section.is-dragging .new-arrival-grid {
+    cursor: grabbing;
+  }
+
   .topics-section .topics-grid {
     display: flex;
     align-items: stretch;
