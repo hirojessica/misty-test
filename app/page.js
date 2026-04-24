@@ -441,12 +441,32 @@ export default function HomePage() {
   const pageRef = useRef(null);
   const newArrivalSectionRef = useRef(null);
   const newArrivalRailRef = useRef(null);
+  const rankingSectionRef = useRef(null);
+  const rankingRailRef = useRef(null);
+  const pickupSectionRef = useRef(null);
+  const pickupRailRef = useRef(null);
   const newArrivalDragRef = useRef({
     isDragging: false,
     dragDistance: 0,
     startScrollLeft: 0,
     startX: 0,
     suppressClick: false,
+  });
+  const productRailDragRef = useRef({
+    ranking: {
+      isDragging: false,
+      dragDistance: 0,
+      startScrollLeft: 0,
+      startX: 0,
+      suppressClick: false,
+    },
+    pickup: {
+      isDragging: false,
+      dragDistance: 0,
+      startScrollLeft: 0,
+      startX: 0,
+      suppressClick: false,
+    },
   });
   const heroDragRef = useRef({
     isDragging: false,
@@ -563,6 +583,109 @@ export default function HomePage() {
       document.removeEventListener("mouseup", finishDrag);
       document.body.style.cursor = "";
       document.body.style.userSelect = "";
+    };
+  }, []);
+
+  useEffect(() => {
+    const targets = [
+      {
+        section: rankingSectionRef.current,
+        rail: rankingRailRef.current,
+        drag: productRailDragRef.current.ranking,
+      },
+      {
+        section: pickupSectionRef.current,
+        rail: pickupRailRef.current,
+        drag: productRailDragRef.current.pickup,
+      },
+    ];
+
+    const cleanups = targets
+      .map(({ section, rail, drag }) => {
+        if (!section || !rail) {
+          return undefined;
+        }
+
+        const finishDrag = () => {
+          if (!drag.isDragging) {
+            return;
+          }
+
+          drag.isDragging = false;
+          drag.suppressClick = drag.dragDistance > 6;
+          section.classList.remove("is-dragging");
+          document.body.style.cursor = "";
+          document.body.style.userSelect = "";
+          document.removeEventListener("mousemove", moveDrag);
+          document.removeEventListener("mouseup", finishDrag);
+          window.setTimeout(() => {
+            drag.suppressClick = false;
+          }, 160);
+        };
+
+        const moveDrag = (event) => {
+          if (!drag.isDragging) {
+            return;
+          }
+
+          const deltaX = event.clientX - drag.startX;
+          drag.dragDistance = Math.max(drag.dragDistance, Math.abs(deltaX));
+          rail.scrollLeft = drag.startScrollLeft - deltaX;
+
+          if (drag.dragDistance > 3) {
+            event.preventDefault();
+          }
+        };
+
+        const startDrag = (event) => {
+          if (event.button !== 0 || rail.scrollWidth <= rail.clientWidth) {
+            return;
+          }
+
+          drag.isDragging = true;
+          drag.dragDistance = 0;
+          drag.startX = event.clientX;
+          drag.startScrollLeft = rail.scrollLeft;
+          drag.suppressClick = false;
+          section.classList.add("is-dragging");
+          document.body.style.cursor = "grabbing";
+          document.body.style.userSelect = "none";
+          document.addEventListener("mousemove", moveDrag, { passive: false });
+          document.addEventListener("mouseup", finishDrag);
+        };
+
+        const suppressDraggedClick = (event) => {
+          if (!drag.suppressClick) {
+            return;
+          }
+
+          event.preventDefault();
+          event.stopPropagation();
+          drag.suppressClick = false;
+        };
+
+        const preventNativeDrag = (event) => {
+          event.preventDefault();
+        };
+
+        section.addEventListener("mousedown", startDrag);
+        section.addEventListener("click", suppressDraggedClick, true);
+        section.addEventListener("dragstart", preventNativeDrag, true);
+
+        return () => {
+          section.removeEventListener("mousedown", startDrag);
+          section.removeEventListener("click", suppressDraggedClick, true);
+          section.removeEventListener("dragstart", preventNativeDrag, true);
+          document.removeEventListener("mousemove", moveDrag);
+          document.removeEventListener("mouseup", finishDrag);
+          document.body.style.cursor = "";
+          document.body.style.userSelect = "";
+        };
+      })
+      .filter(Boolean);
+
+    return () => {
+      cleanups.forEach((cleanup) => cleanup());
     };
   }, []);
 
@@ -869,11 +992,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="ranking-section" id="ranking">
+      <section className="ranking-section" id="ranking" ref={rankingSectionRef}>
         <div className="section-heading-wrap">
           <h2 className="section-heading">RANKING</h2>
         </div>
-        <div className="product-rail product-rail-five">
+        <div className="product-rail product-rail-five" ref={rankingRailRef}>
           {rankingItems.map((item, index) => (
             <article className="catalog-card catalog-card-ranked" key={item.href}>
               <a className="catalog-link" href={item.href}>
@@ -893,11 +1016,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="pickup-section" id="pickup">
+      <section className="pickup-section" id="pickup" ref={pickupSectionRef}>
         <div className="section-heading-wrap">
           <h2 className="section-heading">PICK UP</h2>
         </div>
-        <div className="product-grid product-grid-three">
+        <div className="product-grid product-grid-three" ref={pickupRailRef}>
           {pickupItems.map((item) => (
             <article className="catalog-card" key={item.href}>
               <a className="catalog-link" href={item.href}>
