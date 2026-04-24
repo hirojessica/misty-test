@@ -170,6 +170,11 @@ img {
   list-style: none;
 }
 
+.mobile-menu-toggle,
+.mobile-menu-panel {
+  display: none;
+}
+
 .nav-icon-item {
   display: flex;
 }

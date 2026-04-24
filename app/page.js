@@ -509,6 +509,7 @@ export default function HomePage() {
     startX: 0,
   });
   const [activeHeroIndex, setActiveHeroIndex] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const activeHeroSlide = heroSlides[activeHeroIndex];
 
   useGSAP(
@@ -754,6 +755,17 @@ export default function HomePage() {
     };
   }, []);
 
+  useEffect(() => {
+    const closeMenuOnEscape = (event) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", closeMenuOnEscape);
+    return () => document.removeEventListener("keydown", closeMenuOnEscape);
+  }, []);
+
   const goToHeroSlide = (direction) => {
     setActiveHeroIndex((current) => (current + direction + heroSlides.length) % heroSlides.length);
   };
@@ -767,7 +779,7 @@ export default function HomePage() {
       return;
     }
 
-    if (event.target instanceof Element && event.target.closest(".hero-slide-controls")) {
+    if (event.target instanceof Element && event.target.closest(".hero-slide-controls, .topbar, .mobile-menu-panel")) {
       return;
     }
 
@@ -865,6 +877,18 @@ export default function HomePage() {
             <span className="brand-mark">MISTY</span>
             <span className="brand-sub">COLLECTION</span>
           </div>
+          <button
+            className={`mobile-menu-toggle${mobileMenuOpen ? " is-open" : ""}`}
+            type="button"
+            aria-controls="mobile-menu-panel"
+            aria-expanded={mobileMenuOpen}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileMenuOpen((open) => !open)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
           <nav className="nav-pill nav-pill-overlay" aria-label="Primary">
             <ul className="nav-menu-list">
               {navGroups.map((group) => (
@@ -936,6 +960,59 @@ export default function HomePage() {
               </button>
             </li>
           </ul>
+          <div
+            className={`mobile-menu-panel${mobileMenuOpen ? " is-open" : ""}`}
+            id="mobile-menu-panel"
+            aria-hidden={!mobileMenuOpen}
+          >
+            <nav className="mobile-menu-nav" aria-label="Mobile primary">
+              {navGroups.map((group) => (
+                <div className="mobile-menu-group" key={group.label}>
+                  {group.href ? (
+                    <a
+                      className="mobile-menu-heading mobile-menu-heading-link"
+                      href={group.href}
+                      rel={group.href.startsWith("http") ? "noreferrer" : undefined}
+                      target={group.href.startsWith("http") ? "_blank" : undefined}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {group.label}
+                    </a>
+                  ) : (
+                    <>
+                      <p className="mobile-menu-heading">{group.label}</p>
+                      <div className="mobile-menu-links">
+                        {group.children.map((item) => (
+                          <a
+                            className="mobile-menu-link"
+                            href={item.href}
+                            key={`${group.label}-${item.label}`}
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {item.label}
+                          </a>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+              ))}
+            </nav>
+            <div className="mobile-menu-utility" aria-label="Mobile utility">
+              <a href="/view/member/login" onClick={() => setMobileMenuOpen(false)}>
+                Login
+              </a>
+              <a href="/view/member/favorite" onClick={() => setMobileMenuOpen(false)}>
+                Favorite
+              </a>
+              <a href="/view/cart" onClick={() => setMobileMenuOpen(false)}>
+                Cart
+              </a>
+              <button type="button" onClick={() => setMobileMenuOpen(false)}>
+                Search
+              </button>
+            </div>
+          </div>
         </header>
 
         <div className="hero-overlay">
