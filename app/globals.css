@@ -1277,8 +1277,8 @@ img {
   align-items: center;
   justify-content: center;
   width: fit-content;
-  min-width: 0;
-  min-height: 0;
+  min-width: 3.2em;
+  min-height: 1.2em;
   padding: 0;
   border: 0;
   border-radius: 0;
