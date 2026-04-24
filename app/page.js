@@ -1063,9 +1063,9 @@ export default function HomePage() {
               ))}
             </h1>
             <p className="hero-body">
-              {activeHeroSlide.body}
-              <br />
-              {activeHeroSlide.collection}
+              <span className="hero-subcopy">{activeHeroSlide.body}</span>
+              <br className="hero-collection-break" />
+              <span className="hero-collection-label">{activeHeroSlide.collection}</span>
             </p>
 
             <div className="floating-product floating-product-overlay">
