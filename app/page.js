@@ -410,8 +410,10 @@ const heroSlides = [
     id: "drop-ear-charm",
     align: "left",
     image: publicAsset("/hero-misty-clean-hd-v6.png"),
+    mobileImage: publicAsset("/hero-misty-ear-mobile.png"),
     imageAlt: "Model wearing Misty Collection drop charm earrings",
     imagePosition: "62% center",
+    mobileImagePosition: "center center",
     titleLines: ["きらめきをひとしずく。", "私らしい時間が、", "動き出す。"],
     body: "光を味方に、毎日をもっと輝かせてくれるジュエリーを。",
     collection: "MISTY COLLECTION 2026 SUMMER",
@@ -429,8 +431,10 @@ const heroSlides = [
     id: "drop-pendant",
     align: "right",
     image: publicAsset("/hero-misty-pendant.png"),
+    mobileImage: publicAsset("/hero-misty-pendant-mobile.png"),
     imageAlt: "Model wearing Misty Collection drop pendant",
     imagePosition: "center center",
+    mobileImagePosition: "center center",
     titleLines: ["光を味方に、", "私らしい時間が動き出す。"],
     body: "毎日の装いにそっと寄り添う、上品なドロップペンダント。",
     collection: "MISTY COLLECTION 2026 SUMMER",
@@ -888,15 +892,21 @@ export default function HomePage() {
               className={`hero-media-image hero-slide-image${index === activeHeroIndex ? " is-active" : ""}`}
               key={slide.id}
             >
-              <Image
-                alt={slide.imageAlt}
-                fill
-                priority={index === 0}
-                sizes="100vw"
-                src={slide.image}
-                style={{ objectPosition: slide.imagePosition }}
-                unoptimized
-              />
+              <picture>
+                <source media="(max-width: 900px)" srcSet={slide.mobileImage || slide.image} />
+                <Image
+                  alt={slide.imageAlt}
+                  fill
+                  priority={index === 0}
+                  sizes="100vw"
+                  src={slide.image}
+                  style={{
+                    "--hero-image-position": slide.imagePosition,
+                    "--hero-mobile-image-position": slide.mobileImagePosition || slide.imagePosition,
+                  }}
+                  unoptimized
+                />
+              </picture>
             </div>
           ))}
         </div>

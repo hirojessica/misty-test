@@ -355,9 +355,15 @@ img {
   transform: scale(1);
 }
 
+.hero-media-image picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
 .hero-media-image img {
   object-fit: cover;
-  object-position: 62% center;
+  object-position: var(--hero-image-position, 62% center);
 }
 
 .hero-wash {

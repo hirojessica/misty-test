@@ -183,11 +183,11 @@
   }
 
   .hero-media-image img {
-    object-position: 60% center;
+    object-position: var(--hero-mobile-image-position, center center);
   }
 
   .hero-banner[data-hero-align="right"] .hero-media-image img {
-    object-position: 34% center;
+    object-position: var(--hero-mobile-image-position, center center);
   }
 
   .hero-overlay {
