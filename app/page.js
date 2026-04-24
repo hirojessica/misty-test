@@ -441,6 +441,8 @@ export default function HomePage() {
   const pageRef = useRef(null);
   const newArrivalSectionRef = useRef(null);
   const newArrivalRailRef = useRef(null);
+  const topicsSectionRef = useRef(null);
+  const topicsRailRef = useRef(null);
   const rankingSectionRef = useRef(null);
   const rankingRailRef = useRef(null);
   const pickupSectionRef = useRef(null);
@@ -453,6 +455,13 @@ export default function HomePage() {
     suppressClick: false,
   });
   const productRailDragRef = useRef({
+    topics: {
+      isDragging: false,
+      dragDistance: 0,
+      startScrollLeft: 0,
+      startX: 0,
+      suppressClick: false,
+    },
     ranking: {
       isDragging: false,
       dragDistance: 0,
@@ -588,6 +597,11 @@ export default function HomePage() {
 
   useEffect(() => {
     const targets = [
+      {
+        section: topicsSectionRef.current,
+        rail: topicsRailRef.current,
+        drag: productRailDragRef.current.topics,
+      },
       {
         section: rankingSectionRef.current,
         rail: rankingRailRef.current,
@@ -1067,11 +1081,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="topics-section" id="topics">
+      <section className="topics-section" id="topics" ref={topicsSectionRef}>
         <div className="topics-heading-wrap">
           <h2 className="topics-heading">TOPICS</h2>
         </div>
-        <div className="topics-grid">
+        <div className="topics-grid" ref={topicsRailRef}>
           {topics.map((topic, index) => (
             <article className="topics-card" key={topic.href}>
               <a className="topics-link" href={topic.href} rel="noopener noreferrer" target="_blank">

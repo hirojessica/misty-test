@@ -513,6 +513,22 @@
 }
 
 @media (max-width: 900px) {
+  .topics-section .topics-grid {
+    display: flex;
+    align-items: stretch;
+    grid-template-columns: none;
+    gap: 18px;
+    overflow-x: auto;
+    margin-right: -18px;
+    margin-left: -18px;
+    padding: 0 18px 4px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
+    cursor: grab;
+  }
+
   .ranking-section .product-rail-five,
   .pickup-section .product-grid-three {
     display: flex;
@@ -530,9 +546,20 @@
     cursor: grab;
   }
 
+  .topics-section .topics-grid::-webkit-scrollbar,
   .ranking-section .product-rail-five::-webkit-scrollbar,
   .pickup-section .product-grid-three::-webkit-scrollbar {
     display: none;
+  }
+
+  .topics-section .topics-card,
+  .topics-section .topics-card:first-child,
+  .topics-section .topics-card:last-child {
+    flex: 0 0 min(76vw, 340px);
+    width: min(76vw, 340px);
+    grid-column: auto;
+    grid-row: auto;
+    scroll-snap-align: start;
   }
 
   .ranking-section .catalog-card,
@@ -543,18 +570,63 @@
     scroll-snap-align: start;
   }
 
+  .topics-section .topics-link,
+  .topics-section .topics-card:first-child .topics-link,
+  .topics-section .topics-card:not(:first-child) .topics-link {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 176px minmax(0, 1fr);
+    height: 100%;
+    min-height: 360px;
+    padding: 0;
+  }
+
+  .topics-section .topics-card:first-child .topics-link {
+    color: #fffaf4;
+  }
+
+  .topics-section .topics-card:first-child .topics-copy,
+  .topics-section .topics-card:not(:first-child) .topics-copy {
+    position: relative;
+    inset: auto;
+    justify-content: space-between;
+    min-height: 0;
+    padding: 18px;
+    color: inherit;
+  }
+
+  .topics-section .topics-card:not(:first-child) .topics-copy {
+    color: #2f241d;
+  }
+
+  .topics-section .topics-card:first-child .topics-image-wrap,
+  .topics-section .topics-card:not(:first-child) .topics-image-wrap {
+    position: relative;
+    min-height: 0;
+    height: 176px;
+  }
+
+  .topics-section .topics-card:first-child .topics-text,
+  .topics-section .topics-card:not(:first-child) .topics-text {
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .topics-section.is-dragging .topics-grid,
   .ranking-section.is-dragging .product-rail-five,
   .pickup-section.is-dragging .product-grid-three {
     cursor: grabbing;
     scroll-snap-type: none;
   }
 
+  .topics-section .topics-link,
   .ranking-section .catalog-link,
   .pickup-section .catalog-link {
     -webkit-user-drag: none;
     user-select: none;
   }
 
+  .topics-section .topics-image,
   .ranking-section .catalog-image,
   .pickup-section .catalog-image {
     -webkit-user-drag: none;
@@ -564,6 +636,14 @@
 }
 
 @media (max-width: 720px) {
+  .topics-section .topics-grid {
+    gap: 16px;
+    margin-right: -14px;
+    margin-left: -14px;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
   .ranking-section .product-rail-five,
   .pickup-section .product-grid-three {
     gap: 16px;
@@ -571,6 +651,25 @@
     margin-left: -14px;
     padding-right: 14px;
     padding-left: 14px;
+  }
+
+  .topics-section .topics-card,
+  .topics-section .topics-card:first-child,
+  .topics-section .topics-card:last-child {
+    flex-basis: min(78vw, 318px);
+    width: min(78vw, 318px);
+  }
+
+  .topics-section .topics-link,
+  .topics-section .topics-card:first-child .topics-link,
+  .topics-section .topics-card:not(:first-child) .topics-link {
+    grid-template-rows: 156px minmax(0, 1fr);
+    min-height: 334px;
+  }
+
+  .topics-section .topics-card:first-child .topics-image-wrap,
+  .topics-section .topics-card:not(:first-child) .topics-image-wrap {
+    height: 156px;
   }
 
   .ranking-section .catalog-card,
@@ -581,6 +680,25 @@
 }
 
 @media (max-width: 430px) {
+  .topics-section .topics-card,
+  .topics-section .topics-card:first-child,
+  .topics-section .topics-card:last-child {
+    flex-basis: min(80vw, 304px);
+    width: min(80vw, 304px);
+  }
+
+  .topics-section .topics-link,
+  .topics-section .topics-card:first-child .topics-link,
+  .topics-section .topics-card:not(:first-child) .topics-link {
+    grid-template-rows: 142px minmax(0, 1fr);
+    min-height: 316px;
+  }
+
+  .topics-section .topics-card:first-child .topics-image-wrap,
+  .topics-section .topics-card:not(:first-child) .topics-image-wrap {
+    height: 142px;
+  }
+
   .ranking-section .catalog-card,
   .pickup-section .catalog-card {
     flex-basis: min(76vw, 276px);
