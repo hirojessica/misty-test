@@ -393,6 +393,15 @@ const footerGroups = [
   },
 ];
 
+const footerCompactLinks = [
+  { label: "NEW", href: "/view/category/NEW" },
+  { label: "ALL ITEMS", href: "/view/category/all-items" },
+  { label: "STORE", href: "/view/page/shop_list" },
+  { label: "GUIDE", href: "/view/guide" },
+  { label: "CONTACT", href: "/shop/enq202501231" },
+  { label: "LOGIN", href: "/view/member/login" },
+];
+
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const publicAsset = (path) => `${basePath}${path}`;
 
@@ -1206,6 +1215,14 @@ export default function HomePage() {
             <span className="footer-brand-sub">COLLECTION</span>
           </a>
         </div>
+
+        <nav className="footer-mobile-nav" aria-label="Footer quick links">
+          {footerCompactLinks.map((link) => (
+            <a className="footer-mobile-link" href={link.href} key={link.href}>
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
         <div className="footer-menu">
           {footerGroups.map((group) => (

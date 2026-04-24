@@ -1706,6 +1706,10 @@ img {
   display: inline-flex;
 }
 
+.footer-mobile-nav {
+  display: none;
+}
+
 .footer-brand-lockup {
   flex-direction: column;
   gap: 4px;
