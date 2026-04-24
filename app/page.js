@@ -449,6 +449,8 @@ export default function HomePage() {
   const pickupRailRef = useRef(null);
   const checkedSectionRef = useRef(null);
   const checkedRailRef = useRef(null);
+  const instagramSectionRef = useRef(null);
+  const instagramRailRef = useRef(null);
   const newArrivalDragRef = useRef({
     isDragging: false,
     dragDistance: 0,
@@ -479,6 +481,13 @@ export default function HomePage() {
       suppressClick: false,
     },
     checked: {
+      isDragging: false,
+      dragDistance: 0,
+      startScrollLeft: 0,
+      startX: 0,
+      suppressClick: false,
+    },
+    instagram: {
       isDragging: false,
       dragDistance: 0,
       startScrollLeft: 0,
@@ -625,6 +634,11 @@ export default function HomePage() {
         section: checkedSectionRef.current,
         rail: checkedRailRef.current,
         drag: productRailDragRef.current.checked,
+      },
+      {
+        section: instagramSectionRef.current,
+        rail: instagramRailRef.current,
+        drag: productRailDragRef.current.instagram,
       },
     ];
 
@@ -1142,7 +1156,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="instagram-section" id="instagram">
+      <section className="instagram-section" id="instagram" ref={instagramSectionRef}>
         <div className="instagram-heading-wrap">
           <h2 className="instagram-heading">INSTAGRAM</h2>
         </div>
@@ -1172,7 +1186,7 @@ export default function HomePage() {
               </a>
             </div>
           </div>
-          <div className="instagram-grid" aria-label="Instagram posts">
+          <div className="instagram-grid" aria-label="Instagram posts" ref={instagramRailRef}>
             {instagramPosts.map((post, index) => (
               <article className="instagram-card" key={post.href}>
                 <a className="instagram-link" href={post.href} rel="noopener noreferrer" target="_blank">
