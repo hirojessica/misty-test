@@ -78,6 +78,8 @@
     gap: 16px;
     max-height: calc(100svh - 92px);
     overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     padding: 18px;
     border: 1px solid rgba(255, 255, 255, 0.72);
     border-radius: 28px;

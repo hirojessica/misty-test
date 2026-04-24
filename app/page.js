@@ -508,6 +508,7 @@ export default function HomePage() {
     isDragging: false,
     startX: 0,
   });
+  const mobileMenuScrollYRef = useRef(0);
   const [activeHeroIndex, setActiveHeroIndex] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const activeHeroSlide = heroSlides[activeHeroIndex];
@@ -765,6 +766,35 @@ export default function HomePage() {
     document.addEventListener("keydown", closeMenuOnEscape);
     return () => document.removeEventListener("keydown", closeMenuOnEscape);
   }, []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      return undefined;
+    }
+
+    const { body, documentElement } = document;
+    const previousBodyPosition = body.style.position;
+    const previousBodyTop = body.style.top;
+    const previousBodyWidth = body.style.width;
+    const previousBodyOverflow = body.style.overflow;
+    const previousHtmlOverflow = documentElement.style.overflow;
+
+    mobileMenuScrollYRef.current = window.scrollY;
+    body.style.position = "fixed";
+    body.style.top = `-${mobileMenuScrollYRef.current}px`;
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    documentElement.style.overflow = "hidden";
+
+    return () => {
+      body.style.position = previousBodyPosition;
+      body.style.top = previousBodyTop;
+      body.style.width = previousBodyWidth;
+      body.style.overflow = previousBodyOverflow;
+      documentElement.style.overflow = previousHtmlOverflow;
+      window.scrollTo(0, mobileMenuScrollYRef.current);
+    };
+  }, [mobileMenuOpen]);
 
   const goToHeroSlide = (direction) => {
     setActiveHeroIndex((current) => (current + direction + heroSlides.length) % heroSlides.length);
