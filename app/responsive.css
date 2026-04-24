@@ -530,6 +530,7 @@
   }
 
   .ranking-section .product-rail-five,
+  .checked-section .product-rail-five,
   .pickup-section .product-grid-three {
     display: flex;
     align-items: stretch;
@@ -548,6 +549,7 @@
 
   .topics-section .topics-grid::-webkit-scrollbar,
   .ranking-section .product-rail-five::-webkit-scrollbar,
+  .checked-section .product-rail-five::-webkit-scrollbar,
   .pickup-section .product-grid-three::-webkit-scrollbar {
     display: none;
   }
@@ -563,6 +565,7 @@
   }
 
   .ranking-section .catalog-card,
+  .checked-section .catalog-card,
   .pickup-section .catalog-card {
     flex: 0 0 min(70vw, 300px);
     width: min(70vw, 300px);
@@ -614,6 +617,7 @@
 
   .topics-section.is-dragging .topics-grid,
   .ranking-section.is-dragging .product-rail-five,
+  .checked-section.is-dragging .product-rail-five,
   .pickup-section.is-dragging .product-grid-three {
     cursor: grabbing;
     scroll-snap-type: none;
@@ -621,6 +625,7 @@
 
   .topics-section .topics-link,
   .ranking-section .catalog-link,
+  .checked-section .catalog-link,
   .pickup-section .catalog-link {
     -webkit-user-drag: none;
     user-select: none;
@@ -628,6 +633,7 @@
 
   .topics-section .topics-image,
   .ranking-section .catalog-image,
+  .checked-section .catalog-image,
   .pickup-section .catalog-image {
     -webkit-user-drag: none;
     pointer-events: none;
@@ -645,6 +651,7 @@
   }
 
   .ranking-section .product-rail-five,
+  .checked-section .product-rail-five,
   .pickup-section .product-grid-three {
     gap: 16px;
     margin-right: -14px;
@@ -673,6 +680,7 @@
   }
 
   .ranking-section .catalog-card,
+  .checked-section .catalog-card,
   .pickup-section .catalog-card {
     flex-basis: min(74vw, 286px);
     width: min(74vw, 286px);
@@ -700,6 +708,7 @@
   }
 
   .ranking-section .catalog-card,
+  .checked-section .catalog-card,
   .pickup-section .catalog-card {
     flex-basis: min(76vw, 276px);
     width: min(76vw, 276px);

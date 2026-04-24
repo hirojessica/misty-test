@@ -447,6 +447,8 @@ export default function HomePage() {
   const rankingRailRef = useRef(null);
   const pickupSectionRef = useRef(null);
   const pickupRailRef = useRef(null);
+  const checkedSectionRef = useRef(null);
+  const checkedRailRef = useRef(null);
   const newArrivalDragRef = useRef({
     isDragging: false,
     dragDistance: 0,
@@ -470,6 +472,13 @@ export default function HomePage() {
       suppressClick: false,
     },
     pickup: {
+      isDragging: false,
+      dragDistance: 0,
+      startScrollLeft: 0,
+      startX: 0,
+      suppressClick: false,
+    },
+    checked: {
       isDragging: false,
       dragDistance: 0,
       startScrollLeft: 0,
@@ -611,6 +620,11 @@ export default function HomePage() {
         section: pickupSectionRef.current,
         rail: pickupRailRef.current,
         drag: productRailDragRef.current.pickup,
+      },
+      {
+        section: checkedSectionRef.current,
+        rail: checkedRailRef.current,
+        drag: productRailDragRef.current.checked,
       },
     ];
 
@@ -1106,11 +1120,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="checked-section" id="checked-items">
+      <section className="checked-section" id="checked-items" ref={checkedSectionRef}>
         <div className="section-heading-wrap">
           <h2 className="section-heading">CHECKED ITEMS</h2>
         </div>
-        <div className="product-rail product-rail-five">
+        <div className="product-rail product-rail-five" ref={checkedRailRef}>
           {checkedItems.map((item) => (
             <article className="catalog-card" key={item.href}>
               <a className="catalog-link" href={item.href}>
