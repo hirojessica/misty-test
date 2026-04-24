@@ -393,11 +393,14 @@ const footerGroups = [
   },
 ];
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const publicAsset = (path) => `${basePath}${path}`;
+
 const heroSlides = [
   {
     id: "drop-ear-charm",
     align: "left",
-    image: "/hero-misty-clean-hd-v6.png",
+    image: publicAsset("/hero-misty-clean-hd-v6.png"),
     imageAlt: "Model wearing Misty Collection drop charm earrings",
     imagePosition: "62% center",
     titleLines: ["きらめきをひとしずく。", "私らしい時間が、", "動き出す。"],
@@ -406,7 +409,7 @@ const heroSlides = [
     product: {
       alt: "Precious time drop charm earring",
       href: "/view/item/000000001300",
-      image: "/product-drop.webp",
+      image: publicAsset("/product-drop.webp"),
       imagePosition: "center 22%",
       name: "プレシャスタイムドロップチャーム イヤーチャーム",
       price: "¥26,400（税込）",
@@ -416,7 +419,7 @@ const heroSlides = [
   {
     id: "drop-pendant",
     align: "right",
-    image: "/hero-misty-pendant.png",
+    image: publicAsset("/hero-misty-pendant.png"),
     imageAlt: "Model wearing Misty Collection drop pendant",
     imagePosition: "center center",
     titleLines: ["光を味方に、", "私らしい時間が動き出す。"],
@@ -425,7 +428,7 @@ const heroSlides = [
     product: {
       alt: "Precious time drop pendant",
       href: "/view/item/000000001299",
-      image: "/product-pendant.jpg",
+      image: publicAsset("/product-pendant.jpg"),
       imagePosition: "center 18%",
       name: "プレシャスタイムドロップペンダント",
       price: "¥23,100（税込）",
@@ -1033,7 +1036,7 @@ export default function HomePage() {
 
       <footer className="site-footer">
         <div className="footer-logo-wrap">
-          <a className="footer-logo-link footer-brand-lockup" href="/">
+          <a className="footer-logo-link footer-brand-lockup" href={publicAsset("/")}>
             <span className="footer-brand-mark">MISTY</span>
             <span className="footer-brand-sub">COLLECTION</span>
           </a>
