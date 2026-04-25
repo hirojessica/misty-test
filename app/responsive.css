@@ -438,10 +438,12 @@
   }
 
   .hero-body {
-    max-width: min(100%, 330px);
+    max-width: 100%;
     margin-top: 0;
-    font-size: 0.86rem;
+    font-size: 0.82rem;
     line-height: 1.68;
+    white-space: nowrap;
+    letter-spacing: 0;
   }
 
   .floating-product {
@@ -698,8 +700,9 @@
   }
 
   .hero-body {
-    max-width: min(100%, 315px);
-    font-size: 0.82rem;
+    max-width: 100%;
+    font-size: clamp(0.72rem, 3.05vw, 0.78rem);
+    line-height: 1.55;
   }
 
   .floating-product {
