@@ -154,10 +154,18 @@ const product = {
     ["アイテム", "イヤーカフ"],
     ["ブランド", "MISTY"],
     ["素材", "真鍮（ロジウムプレーティング）、キュービックジルコニア"],
-    ["サイズ", "約 直径1.8cm / 幅約0.5cm"],
+    ["サイズ", "約 直径1.8cm / 幅 約0.5cm"],
     ["原産国", "日本"],
   ],
 };
+
+const wrappingOptions = ["簡易包装", "ギフト包装"];
+
+const trustItems = [
+  { title: "全国送料無料", text: "送料込みで総額が分かりやすい" },
+  { title: "ギフト対応", text: "大切な人への贈り物にも" },
+  { title: "日本製", text: "細部まで丁寧に仕立てたジュエリー" },
+];
 
 const relatedProducts = [
   {
@@ -182,7 +190,7 @@ const relatedProducts = [
 
 function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }) {
   return (
-    <header className="topbar product-topbar">
+    <header className="topbar topbar-overlay product-topbar">
       <a className="brand-lockup" href={publicAsset("/")} aria-label="MISTY COLLECTION home">
         <span className="brand-mark">MISTY</span>
         <span className="brand-sub">COLLECTION</span>
@@ -199,7 +207,7 @@ function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }) {
         <span />
         <span />
       </button>
-      <nav className="nav-pill product-nav-pill" aria-label="Primary">
+      <nav className="nav-pill nav-pill-overlay" aria-label="Primary">
         <ul className="nav-menu-list">
           {navGroups.map((group) => (
             <li className="nav-menu-item" key={group.label}>
@@ -355,7 +363,7 @@ export default function ProductDetailClient() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [wrapping, setWrapping] = useState("簡易包装");
+  const [wrapping, setWrapping] = useState(wrappingOptions[0]);
 
   useEffect(() => {
     if (!mobileMenuOpen) {
@@ -374,56 +382,77 @@ export default function ProductDetailClient() {
   }, [mobileMenuOpen]);
 
   return (
-    <main className="page-shell product-detail-shell">
+    <main className="page-shell product-detail-shell product-detail-redesign">
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
 
       <SiteHeader mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
 
-      <section className="pdp-hero" id="top">
-        <div className="pdp-gallery" aria-label="Product images">
-          <div className="pdp-main-image-wrap">
-            <img
-              alt={product.name}
-              className="pdp-main-image"
-              src={product.images[selectedImage]}
-            />
+      <section className="pdp-hero pdp-commerce-hero" id="top">
+        <div className="pdp-visual-stage" aria-label="Product images">
+          <div className="pdp-gallery-frame">
+            <div className="pdp-main-image-wrap">
+              <img alt={product.name} className="pdp-main-image" src={product.images[selectedImage]} />
+            </div>
+            <div className="pdp-thumbnail-row">
+              {product.images.map((image, index) => (
+                <button
+                  aria-label={`画像 ${index + 1} を表示`}
+                  aria-pressed={selectedImage === index}
+                  className={`pdp-thumbnail${selectedImage === index ? " is-active" : ""}`}
+                  key={image}
+                  onClick={() => setSelectedImage(index)}
+                  type="button"
+                >
+                  <img alt="" src={image} />
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="pdp-thumbnail-row">
-            {product.images.map((image, index) => (
-              <button
-                aria-label={`画像 ${index + 1} を表示`}
-                aria-pressed={selectedImage === index}
-                className={`pdp-thumbnail${selectedImage === index ? " is-active" : ""}`}
-                key={image}
-                onClick={() => setSelectedImage(index)}
-                type="button"
-              >
-                <img alt="" src={image} />
-              </button>
-            ))}
+          <div className="pdp-material-note">
+            <span>Mirror polish</span>
+            <p>艶のあるロジウムカラーが、耳元に細い光の輪郭を作ります。</p>
           </div>
         </div>
 
-        <aside className="pdp-purchase" id="purchase-panel" aria-label="Purchase panel">
-          <p className="pdp-kicker">Precious Time</p>
+        <aside className="pdp-purchase pdp-buy-panel" id="purchase-panel" aria-label="Purchase panel">
+          <p className="pdp-kicker">Precious Time / Ear Cuff</p>
           <h1>{product.name}</h1>
           <p className="pdp-code">商品番号 {product.code}</p>
           <p className="pdp-lead">{product.lead}</p>
+
           <div className="pdp-price-row">
             <span>{product.price}</span>
             <small>{product.tax}</small>
           </div>
-          <div className="pdp-point">{product.point}</div>
+
+          <a className="pdp-primary-cta" href={product.officialUrl}>
+            カートに入れる
+          </a>
+
+          <div className="pdp-total-card">
+            <span>配送込み目安</span>
+            <strong>{product.price}</strong>
+            <small>全国送料無料 / {product.point}</small>
+          </div>
 
           <div className="pdp-option-grid">
-            <label className="pdp-field">
-              <span>包装の仕方</span>
-              <select value={wrapping} onChange={(event) => setWrapping(event.target.value)}>
-                <option>簡易包装</option>
-                <option>ギフト包装</option>
-              </select>
-            </label>
+            <fieldset className="pdp-field pdp-choice-field">
+              <legend>包装の仕方</legend>
+              <div className="pdp-choice-row">
+                {wrappingOptions.map((option) => (
+                  <button
+                    className={wrapping === option ? "is-active" : ""}
+                    key={option}
+                    onClick={() => setWrapping(option)}
+                    type="button"
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+
             <div className="pdp-field">
               <span>数量</span>
               <div className="pdp-quantity">
@@ -432,26 +461,40 @@ export default function ProductDetailClient() {
                 </button>
                 <output>{quantity}</output>
                 <button type="button" onClick={() => setQuantity((value) => value + 1)}>
-                  ＋
+                  +
                 </button>
               </div>
             </div>
           </div>
-
-          <a className="pdp-primary-cta" href={product.officialUrl}>
-            カートに入れる
-          </a>
           <div className="pdp-secondary-actions">
             <a href="/view/member/login">お気に入りに追加</a>
             <a href="#spec">商品情報を見る</a>
           </div>
 
           <div className="pdp-trust-grid">
-            <span>全国送料無料</span>
-            <span>{wrapping}</span>
-            <span>安心のアフターサービス</span>
+            {trustItems.map((item) => (
+              <span key={item.title}>
+                <strong>{item.title}</strong>
+                <small>{item.text}</small>
+              </span>
+            ))}
           </div>
         </aside>
+      </section>
+
+      <section className="pdp-proof-strip" aria-label="Purchase confidence">
+        <div>
+          <span>Shipping</span>
+          <strong>全国送料無料</strong>
+        </div>
+        <div>
+          <span>Gift</span>
+          <strong>{wrapping}</strong>
+        </div>
+        <div>
+          <span>Support</span>
+          <strong>アフターサービス対応</strong>
+        </div>
       </section>
 
       <section className="pdp-story-section">
@@ -477,10 +520,11 @@ export default function ProductDetailClient() {
         </article>
         <article className="pdp-care-card">
           <p className="pdp-section-kicker">Care</p>
-          <h2>素材について</h2>
-          <p>
-            長くご愛用いただくために、真鍮、プレーティング、キュービックジルコニアの特徴と取り扱い方法をご確認ください。
-          </p>
+          <h2>購入前に迷いやすいこと。</h2>
+          <div className="pdp-care-list">
+            <p>片耳用のイヤーカフです。耳元に引っかけるだけで、ピアスホールがない方にも合わせやすい仕様です。</p>
+            <p>ロジウムプレーティングは汗や水分を拭き取って保管すると、美しい艶を長く楽しめます。</p>
+          </div>
           <a href="/view/page/materials">JEWELRY CARE</a>
         </article>
       </section>
