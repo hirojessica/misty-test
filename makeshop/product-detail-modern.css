@@ -1,0 +1,451 @@
+/* MISTY modern product detail draft for Makeshop Creator Mode */
+.misty-modern-pdp {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255,255,255,.92), transparent 25%),
+    radial-gradient(circle at 82% 8%, rgba(211,187,153,.28), transparent 26%),
+    linear-gradient(180deg,#f7f2ed 0%,#fbf8f4 44%,#efe7de 100%);
+  color: #2f241d;
+}
+
+.ms-pdp {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.ms-pdp-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(410px, .54fr);
+  gap: clamp(28px,4vw,74px);
+  width: min(100% - 64px, 1500px);
+  margin: clamp(44px,5vw,78px) auto 0;
+  align-items: start;
+}
+
+.ms-pdp-gallery {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.ms-pdp-gallery-frame {
+  display: grid;
+  grid-template-columns: 96px minmax(0,1fr);
+  gap: 16px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: clamp(30px,3vw,52px);
+  background: linear-gradient(135deg,rgba(255,255,255,.78),rgba(241,233,224,.5)), rgba(255,251,247,.52);
+  box-shadow: 0 34px 90px rgba(58,41,27,.12), inset 0 1px 0 rgba(255,255,255,.7);
+  backdrop-filter: blur(18px) saturate(125%);
+}
+
+.ms-pdp-main-slider,
+.ms-pdp-main-single {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: clamp(22px,2.2vw,38px);
+  background: #f2f2ef;
+}
+
+.ms-pdp-main-img {
+  display: block;
+  width: 100%;
+  min-height: clamp(620px,58vw,820px);
+  object-fit: cover;
+  object-position: center;
+  transition: transform .7s ease, filter .35s ease;
+}
+
+.ms-pdp-main-slider:hover .ms-pdp-main-img,
+.ms-pdp-main-single:hover .ms-pdp-main-img {
+  transform: scale(1.035);
+  filter: contrast(1.02);
+}
+
+.ms-pdp-thumbs {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+}
+
+.ms-pdp-thumbs .slick-track {
+  display: grid !important;
+  gap: 10px;
+  transform: none !important;
+  width: 100% !important;
+}
+
+.ms-pdp-thumbs .slick-slide {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.ms-pdp-thumb-img {
+  display: block;
+  width: 100%;
+  min-height: 104px;
+  object-fit: cover;
+  border-radius: 20px;
+  background: rgba(255,255,255,.42);
+}
+
+.ms-pdp-kicker {
+  color: rgba(141,111,66,.92);
+  font-size: .72rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.ms-pdp-buy-panel {
+  position: sticky;
+  top: 116px;
+  display: grid;
+  align-content: start;
+  padding: clamp(28px,3vw,44px);
+  border: 1px solid rgba(255,255,255,.68);
+  border-radius: 36px;
+  background: radial-gradient(circle at 84% 0%, rgba(255,255,255,.95), transparent 35%), linear-gradient(180deg,rgba(255,253,250,.9),rgba(240,230,219,.74));
+  box-shadow: 0 34px 82px rgba(58,41,27,.14), inset 0 1px 0 rgba(255,255,255,.68);
+  backdrop-filter: blur(24px) saturate(138%);
+}
+
+.ms-pdp-title {
+  margin: 0;
+  max-width: 8.5em;
+  font-family: "Times New Roman", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: clamp(2.4rem,4vw,4.8rem);
+  font-weight: 500;
+  line-height: .98;
+  letter-spacing: -.06em;
+}
+
+.ms-pdp-code {
+  margin-top: 14px;
+  color: rgba(47,36,29,.58);
+  font-size: .82rem;
+  letter-spacing: .08em;
+}
+
+.ms-pdp-lead {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(108,89,72,.14);
+  color: rgba(47,36,29,.78);
+  line-height: 1.9;
+}
+
+.ms-pdp-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.ms-pdp-price-label {
+  width: 100%;
+  color: rgba(47,36,29,.58);
+  font-size: .8rem;
+  letter-spacing: .12em;
+}
+
+.ms-pdp-price .product-price__main {
+  margin-left: 0;
+  font-family: "Times New Roman", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: clamp(2.4rem,3.6vw,4rem);
+  line-height: 1;
+}
+
+.ms-pdp-primary-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 68px;
+  margin-top: 22px;
+  border-radius: 999px;
+  background: #211711;
+  color: #fffdf8;
+  font-weight: 600;
+  letter-spacing: .16em;
+  box-shadow: 0 18px 44px rgba(47,36,29,.24);
+}
+
+.ms-pdp-primary-cta::after {
+  content: "→";
+  margin-left: 14px;
+  font-weight: 400;
+}
+
+.ms-pdp-total-card {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: 6px 14px;
+  align-items: baseline;
+  margin-top: 16px;
+  padding: 18px 20px;
+  border: 1px solid rgba(108,89,72,.12);
+  border-radius: 24px;
+  background: rgba(255,255,255,.5);
+}
+
+.ms-pdp-total-card span,
+.ms-pdp-total-card small {
+  color: rgba(47,36,29,.58);
+  font-size: .76rem;
+  letter-spacing: .08em;
+}
+
+.ms-pdp-total-card strong {
+  font-family: "Times New Roman", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 1.42rem;
+  font-weight: 500;
+}
+
+.ms-pdp-total-card small {
+  grid-column: 1 / -1;
+  letter-spacing: .02em;
+}
+
+.ms-pdp-option {
+  margin-top: 18px;
+}
+
+.ms-pdp-option .makeshop-option-wrap {
+  gap: 12px;
+}
+
+.ms-pdp-option .makeshop-option-label,
+.ms-pdp-quantity .product-qt__label {
+  color: rgba(47,36,29,.64);
+  font-size: .76rem;
+  letter-spacing: .12em;
+}
+
+.ms-pdp-option .makeshop-option-select,
+.ms-pdp-quantity .product-qt__input {
+  min-height: 54px;
+  border: 1px solid rgba(108,89,72,.16);
+  border-radius: 999px;
+  background: rgba(255,255,255,.52);
+}
+
+.ms-pdp-wrapping {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid rgba(108,89,72,.1);
+  border-radius: 22px;
+  background: rgba(255,255,255,.34);
+}
+
+.ms-pdp-quantity {
+  margin-top: 16px;
+}
+
+.ms-pdp-secondary-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.ms-pdp-secondary-actions .product-btns__other-link {
+  width: auto;
+  min-height: 52px;
+  padding: 10px 14px;
+  border: 1px solid rgba(108,89,72,.14);
+  border-radius: 999px;
+  background: rgba(255,255,255,.42);
+  color: rgba(47,36,29,.78);
+}
+
+.ms-pdp-secondary-actions .product-btns__other-link + .product-btns__other-link {
+  border-left: 1px solid rgba(108,89,72,.14);
+}
+
+.ms-pdp-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.ms-pdp-trust-grid span {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  min-height: 86px;
+  padding: 13px 10px;
+  border: 1px solid rgba(108,89,72,.1);
+  border-radius: 18px;
+  background: rgba(255,255,255,.34);
+  text-align: center;
+}
+
+.ms-pdp-trust-grid strong {
+  font-weight: 500;
+}
+
+.ms-pdp-trust-grid small {
+  color: rgba(47,36,29,.54);
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.ms-pdp-proof-strip {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 1px;
+  width: min(100% - 64px,1500px);
+  margin: clamp(24px,3vw,42px) auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.62);
+  border-radius: 28px;
+  background: rgba(255,251,247,.5);
+  box-shadow: 0 18px 48px rgba(58,41,27,.07);
+}
+
+.ms-pdp-proof-strip div {
+  display: grid;
+  gap: 6px;
+  padding: 22px 26px;
+  background: rgba(255,255,255,.35);
+}
+
+.ms-pdp-proof-strip span {
+  color: rgba(141,111,66,.82);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.ms-pdp-media,
+.ms-pdp-info,
+.ms-pdp-related,
+.ms-pdp-review,
+.ms-pdp-checked {
+  width: min(100% - 64px,1320px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ms-pdp-mobile-sticky {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  .ms-pdp-hero,
+  .ms-pdp-proof-strip,
+  .ms-pdp-media,
+  .ms-pdp-info,
+  .ms-pdp-related,
+  .ms-pdp-review,
+  .ms-pdp-checked {
+    width: calc(100% - 24px);
+  }
+
+  .ms-pdp-hero {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 96px;
+  }
+
+  .ms-pdp-gallery-frame {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 30px;
+  }
+
+  .ms-pdp-main-slider,
+  .ms-pdp-main-single {
+    grid-column: 1;
+  }
+
+  .ms-pdp-main-img {
+    min-height: min(112vw,560px);
+  }
+
+  .ms-pdp-thumbs {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .ms-pdp-thumbs .slick-track {
+    display: flex !important;
+    gap: 10px;
+    overflow-x: auto;
+  }
+
+  .ms-pdp-thumbs .slick-slide {
+    flex: 0 0 92px;
+  }
+
+  .ms-pdp-buy-panel {
+    position: relative;
+    top: auto;
+    padding: 22px;
+    border-radius: 30px;
+  }
+
+  .ms-pdp-title {
+    font-size: clamp(2.2rem,10vw,3.35rem);
+  }
+
+  .ms-pdp-secondary-actions,
+  .ms-pdp-trust-grid,
+  .ms-pdp-proof-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .ms-pdp-primary-cta {
+    display: none;
+  }
+
+  .ms-pdp-mobile-sticky {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 1000;
+    display: grid;
+    grid-template-columns: minmax(0,1fr) auto;
+    gap: 12px;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,.68);
+    border-radius: 999px;
+    background: rgba(255,251,247,.88);
+    box-shadow: 0 18px 46px rgba(58,41,27,.18);
+    backdrop-filter: blur(22px) saturate(140%);
+  }
+
+  .ms-pdp-mobile-sticky span {
+    display: block;
+    overflow: hidden;
+    color: rgba(47,36,29,.72);
+    font-size: .72rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .ms-pdp-mobile-sticky strong {
+    font-family: "Times New Roman", "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-size: 1.16rem;
+    font-weight: 500;
+  }
+
+  .ms-pdp-mobile-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 20px;
+    border-radius: 999px;
+    background: #211711;
+    color: #fffdf8;
+    letter-spacing: .12em;
+  }
+}
